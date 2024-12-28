@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suspicious</title>
+    <title>Suspicious Chaos</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -26,6 +26,7 @@
             margin-bottom: 0.5rem;
             animation: glow 2s infinite;
             text-shadow: 0 0 10px #ff4a4a, 0 0 20px #ff1a1a;
+            cursor: pointer;
         }
 
         @keyframes glow {
@@ -41,6 +42,7 @@
             font-size: 1.2rem;
             margin-bottom: 2rem;
             color: #ffffff;
+            cursor: pointer;
         }
 
         .button {
@@ -84,25 +86,26 @@
             }
         }
 
-        .hidden {
-            display: none;
-        }
-
-        .secret-text {
+        .floating-text {
             position: absolute;
-            bottom: 20px;
-            font-size: 1.1rem;
+            top: 20%;
+            left: 10%;
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
             color: #ff4a4a;
-            animation: secretFade 2s infinite;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: floatText 5s infinite ease-in-out;
             cursor: pointer;
         }
 
-        @keyframes secretFade {
+        @keyframes floatText {
             0%, 100% {
-                opacity: 1;
+                transform: translateY(0);
             }
             50% {
-                opacity: 0.3;
+                transform: translateY(-20px);
             }
         }
 
@@ -152,15 +155,15 @@
     </style>
 </head>
 <body>
-    <h1>Welcome to Suspicious!</h1>
-    <p>Anything can happen here. Good luck. 😏</p>
+    <h1 onclick="triggerRandomEvent()">Welcome to Suspicious!</h1>
+    <p onclick="triggerRandomEvent()">Click anywhere. Anything can happen. 🤔</p>
     <button class="button" onclick="triggerRandomEvent()">Don’t Press Me</button>
     <img 
         class="emoji" 
         src="https://em-content.zobj.net/source/apple/279/detective_1f575-fe0f.png" 
         alt="Detective Emoji" 
-        onclick="handleEmojiClick()">
-    <div class="secret-text" onclick="revealSecret()">Psst... Click here for a secret.</div>
+        onclick="triggerRandomEvent()">
+    <div class="floating-text" onclick="triggerRandomEvent()">What's this? Click me!</div>
 
     <!-- Modal -->
     <div class="overlay" id="overlay" onclick="closePopup()"></div>
@@ -171,24 +174,24 @@
 
     <script>
         function triggerRandomEvent() {
-            const events = [
-                () => showPopup("Why did you press this? The detective is watching... 👀"),
-                () => showPopup("Oops! Something suspicious is happening..."),
-                () => document.body.style.background = "#ff0000",
-                () => alert("You’ve been caught! 🕵️‍♂️"),
-                () => showPopup("Now you’ve done it. Expect a call from the detective."),
+            const randomColors = ['#ff4a4a', '#4aff4a', '#4a4aff', '#ffff4a', '#ff4aff'];
+            const randomMessages = [
+                "Why did you click me? 🕵️",
+                "Now things will get weird. 😏",
+                "You're officially sus. 🚨",
+                "I warned you, but you didn't listen. 🤷",
+                "This page is now cursed. Have fun! 👻",
+                "Detective emoji just reported you. 😱",
+                "Look behind you. Just kidding... or am I? 👀",
             ];
-            const randomEvent = events[Math.floor(Math.random() * events.length)];
-            randomEvent();
-        }
+            const randomActions = [
+                () => document.body.style.background = randomColors[Math.floor(Math.random() * randomColors.length)],
+                () => showPopup(randomMessages[Math.floor(Math.random() * randomMessages.length)]),
+                () => createRandomFloatingText(),
+            ];
 
-        function handleEmojiClick() {
-            const emoji = document.querySelector('.emoji');
-            emoji.src = "https://em-content.zobj.net/source/apple/279/eyes_1f440.png"; // Change to eyes emoji
-            setTimeout(() => {
-                emoji.src = "https://em-content.zobj.net/source/apple/279/detective_1f575-fe0f.png"; // Change back
-                showPopup("The detective saw you touch him. Bad move. 😡");
-            }, 1000);
+            const randomAction = randomActions[Math.floor(Math.random() * randomActions.length)];
+            randomAction();
         }
 
         function showPopup(message) {
@@ -202,8 +205,14 @@
             document.getElementById('overlay').style.display = 'none';
         }
 
-        function revealSecret() {
-            showPopup("Congratulations! You’ve found the secret message: Always stay suspicious. 🕶️");
+        function createRandomFloatingText() {
+            const floatingText = document.createElement('div');
+            floatingText.textContent = "Random chaos! 🤪";
+            floatingText.className = 'floating-text';
+            floatingText.style.top = Math.random() * 80 + '%';
+            floatingText.style.left = Math.random() * 80 + '%';
+            floatingText.onclick = triggerRandomEvent;
+            document.body.appendChild(floatingText);
         }
     </script>
 </body>
