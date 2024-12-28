@@ -31,3 +31,35 @@ You’ll find:
 
 ---
 
+## 🕶️ FAQ  
+
+### Q: Is this safe?  
+**A:** No.  
+
+### Q: What does the button do?  
+**A:** It does… things.  
+
+### Q: What happens if I press the button?  
+**A:** You’ll find out.  
+
+### Q: Can I delete this repository?  
+**A:** Sure, but you’ll never unsee it.  
+
+### Q: Is this legal?  
+**A:** Let’s not worry about that.  
+
+### Q: Is this a joke?  
+**A:** Everything is a joke if you think about it long enough.  
+
+
+## 🚷 Disclaimer  
+
+By accessing this repository, you acknowledge that you’re doing so at your own risk. The creators are not responsible for:  
+
+- Strange browser behaviors.  
+- Unexplained feelings of paranoia.  
+- The sudden appearance of detective hats on your desk.  
+
+Stay curious. Stay cautious. Stay... suspicious.  
+
+
