@@ -6,9 +6,9 @@
     <title>Suspicious</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background: #1e1e2f;
-            color: #ffffff;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: #0f0f1c;
+            color: #e0e0e0;
             margin: 0;
             padding: 0;
             display: flex;
@@ -34,43 +34,59 @@
 
         h1 {
             font-size: 3rem;
-            color: #ff6f61;
+            color: #ff6666;
             margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px #ff6666, 0 0 20px #ff4444;
         }
 
         p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
+            animation: textFade 4s infinite;
+        }
+
+        @keyframes textFade {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
         }
 
         button {
-            background: #ff6f61;
+            background: linear-gradient(90deg, #ff6666, #ff4444);
             color: #ffffff;
             border: none;
             padding: 0.8rem 1.5rem;
             font-size: 1rem;
             cursor: pointer;
-            border-radius: 8px;
+            border-radius: 50px;
             transition: transform 0.2s, background 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
         button:hover {
             transform: scale(1.1);
-            background: #d4554b;
+            background: linear-gradient(90deg, #d43b3b, #c12020);
         }
 
         .emoji {
-            font-size: 5rem;
+            font-size: 6rem;
             margin-top: 1rem;
-            animation: blink 1.5s infinite;
+            animation: shake 2s infinite;
+            cursor: pointer;
         }
 
-        @keyframes blink {
+        @keyframes shake {
             0%, 100% {
-                opacity: 1;
+                transform: rotate(0deg);
             }
-            50% {
-                opacity: 0.3;
+            25% {
+                transform: rotate(-15deg);
+            }
+            75% {
+                transform: rotate(15deg);
             }
         }
     </style>
@@ -78,14 +94,29 @@
 <body>
     <div class="container">
         <h1>Welcome to Suspicious!</h1>
-        <p>Are you sure you're supposed to be here? 🤔</p>
-        <button onclick="handleClick()">Proceed with Caution</button>
-        <div class="emoji">🕵️‍♂️</div>
+        <p>You're not supposed to be here... Or are you? 🕵️‍♀️</p>
+        <button onclick="handleClick()">Don’t Press Me</button>
+        <div class="emoji" onclick="handleEmojiClick()">🕵️‍♂️</div>
     </div>
 
     <script>
         function handleClick() {
-            alert("You have entered the suspicious zone. Proceed at your own risk! 🚨");
+            const messages = [
+                "I told you not to press me! 🚨",
+                "Seriously? You had ONE job... 😒",
+                "Alright, enjoy your regret. 🤷",
+                "Something suspicious is happening now... or is it? 👀"
+            ];
+            alert(messages[Math.floor(Math.random() * messages.length)]);
+        }
+
+        function handleEmojiClick() {
+            const emoji = document.querySelector('.emoji');
+            emoji.textContent = "👀";
+            setTimeout(() => {
+                emoji.textContent = "🕵️‍♂️";
+                alert("The detective is watching you. Always. 🔍");
+            }, 1000);
         }
     </script>
 </body>
