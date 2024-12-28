@@ -72,10 +72,11 @@
         }
 
         .emoji {
-            font-size: 6rem;
+            width: 100px;
+            height: 100px;
             margin-top: 1rem;
-            animation: shake 2s infinite;
             cursor: pointer;
+            animation: shake 2s infinite;
         }
 
         @keyframes shake {
@@ -96,7 +97,11 @@
         <h1>Welcome to Suspicious!</h1>
         <p>You're not supposed to be here... Or are you? 🕵️‍♀️</p>
         <button onclick="handleClick()">Don’t Press Me</button>
-        <div class="emoji" onclick="handleEmojiClick()">🕵️‍♂️</div>
+        <img 
+            class="emoji" 
+            src="https://em-content.zobj.net/source/apple/279/detective_1f575-fe0f.png" 
+            alt="Detective Emoji" 
+            onclick="handleEmojiClick()">
     </div>
 
     <script>
@@ -112,9 +117,9 @@
 
         function handleEmojiClick() {
             const emoji = document.querySelector('.emoji');
-            emoji.textContent = "👀";
+            emoji.src = "https://em-content.zobj.net/source/apple/279/eyes_1f440.png"; // Temporary eyes emoji image
             setTimeout(() => {
-                emoji.textContent = "🕵️‍♂️";
+                emoji.src = "https://em-content.zobj.net/source/apple/279/detective_1f575-fe0f.png"; // Revert to detective
                 alert("The detective is watching you. Always. 🔍");
             }, 1000);
         }
