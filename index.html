@@ -6,122 +6,204 @@
     <title>Suspicious</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background: #0f0f1c;
-            color: #e0e0e0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #282845);
+            color: #ffffff;
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             overflow: hidden;
-        }
-
-        .container {
             text-align: center;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
         }
 
         h1 {
             font-size: 3rem;
-            color: #ff6666;
+            color: #ff4a4a;
             margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px #ff6666, 0 0 20px #ff4444;
+            animation: glow 2s infinite;
+            text-shadow: 0 0 10px #ff4a4a, 0 0 20px #ff1a1a;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px #ff4a4a, 0 0 20px #ff1a1a;
+            }
+            50% {
+                text-shadow: 0 0 20px #ff6666, 0 0 40px #ff3333;
+            }
         }
 
         p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
-            animation: textFade 4s infinite;
+            color: #ffffff;
         }
 
-        @keyframes textFade {
+        .button {
+            background: linear-gradient(90deg, #ff4a4a, #ff1a1a);
+            color: #ffffff;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: transform 0.3s, background 0.3s;
+            box-shadow: 0 8px 20px rgba(255, 74, 74, 0.5);
+            position: relative;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            background: linear-gradient(90deg, #ff6666, #ff3333);
+        }
+
+        .emoji {
+            width: 120px;
+            height: 120px;
+            margin-top: 30px;
+            animation: spin 4s infinite linear;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .emoji:hover {
+            transform: scale(1.2) rotate(15deg);
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .secret-text {
+            position: absolute;
+            bottom: 20px;
+            font-size: 1.1rem;
+            color: #ff4a4a;
+            animation: secretFade 2s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes secretFade {
             0%, 100% {
                 opacity: 1;
             }
             50% {
-                opacity: 0.5;
+                opacity: 0.3;
             }
         }
 
-        button {
-            background: linear-gradient(90deg, #ff6666, #ff4444);
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #282845;
             color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            display: none;
+            z-index: 1000;
+        }
+
+        .modal p {
+            margin-bottom: 20px;
+        }
+
+        .modal button {
+            background: #ff4a4a;
+            color: white;
             border: none;
             padding: 0.8rem 1.5rem;
-            font-size: 1rem;
             cursor: pointer;
-            border-radius: 50px;
-            transition: transform 0.2s, background 0.2s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            transition: background 0.3s;
         }
 
-        button:hover {
-            transform: scale(1.1);
-            background: linear-gradient(90deg, #d43b3b, #c12020);
+        .modal button:hover {
+            background: #ff6666;
         }
 
-        .emoji {
-            width: 100px;
-            height: 100px;
-            margin-top: 1rem;
-            cursor: pointer;
-            animation: shake 2s infinite;
-        }
-
-        @keyframes shake {
-            0%, 100% {
-                transform: rotate(0deg);
-            }
-            25% {
-                transform: rotate(-15deg);
-            }
-            75% {
-                transform: rotate(15deg);
-            }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Suspicious!</h1>
-        <p>You're not supposed to be here... Or are you? 🕵️‍♀️</p>
-        <button onclick="handleClick()">Don’t Press Me</button>
-        <img 
-            class="emoji" 
-            src="https://em-content.zobj.net/source/apple/279/detective_1f575-fe0f.png" 
-            alt="Detective Emoji" 
-            onclick="handleEmojiClick()">
+    <h1>Welcome to Suspicious!</h1>
+    <p>Anything can happen here. Good luck. 😏</p>
+    <button class="button" onclick="triggerRandomEvent()">Don’t Press Me</button>
+    <img 
+        class="emoji" 
+        src="https://em-content.zobj.net/source/apple/279/detective_1f575-fe0f.png" 
+        alt="Detective Emoji" 
+        onclick="handleEmojiClick()">
+    <div class="secret-text" onclick="revealSecret()">Psst... Click here for a secret.</div>
+
+    <!-- Modal -->
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+    <div class="modal" id="popup">
+        <p id="popupText">You shouldn’t have done that. 😒</p>
+        <button onclick="closePopup()">Close</button>
     </div>
 
     <script>
-        function handleClick() {
-            const messages = [
-                "I told you not to press me! 🚨",
-                "Seriously? You had ONE job... 😒",
-                "Alright, enjoy your regret. 🤷",
-                "Something suspicious is happening now... or is it? 👀"
+        function triggerRandomEvent() {
+            const events = [
+                () => showPopup("Why did you press this? The detective is watching... 👀"),
+                () => showPopup("Oops! Something suspicious is happening..."),
+                () => document.body.style.background = "#ff0000",
+                () => alert("You’ve been caught! 🕵️‍♂️"),
+                () => showPopup("Now you’ve done it. Expect a call from the detective."),
             ];
-            alert(messages[Math.floor(Math.random() * messages.length)]);
+            const randomEvent = events[Math.floor(Math.random() * events.length)];
+            randomEvent();
         }
 
         function handleEmojiClick() {
             const emoji = document.querySelector('.emoji');
-            emoji.src = "https://em-content.zobj.net/source/apple/279/eyes_1f440.png"; // Temporary eyes emoji image
+            emoji.src = "https://em-content.zobj.net/source/apple/279/eyes_1f440.png"; // Change to eyes emoji
             setTimeout(() => {
-                emoji.src = "https://em-content.zobj.net/source/apple/279/detective_1f575-fe0f.png"; // Revert to detective
-                alert("The detective is watching you. Always. 🔍");
+                emoji.src = "https://em-content.zobj.net/source/apple/279/detective_1f575-fe0f.png"; // Change back
+                showPopup("The detective saw you touch him. Bad move. 😡");
             }, 1000);
+        }
+
+        function showPopup(message) {
+            document.getElementById('popupText').textContent = message;
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function revealSecret() {
+            showPopup("Congratulations! You’ve found the secret message: Always stay suspicious. 🕶️");
         }
     </script>
 </body>
