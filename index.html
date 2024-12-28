@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspicious</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #1e1e2f;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ff6f61;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        button {
+            background: #ff6f61;
+            color: #ffffff;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: #d4554b;
+        }
+
+        .emoji {
+            font-size: 5rem;
+            margin-top: 1rem;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Suspicious!</h1>
+        <p>Are you sure you're supposed to be here? 🤔</p>
+        <button onclick="handleClick()">Proceed with Caution</button>
+        <div class="emoji">🕵️‍♂️</div>
+    </div>
+
+    <script>
+        function handleClick() {
+            alert("You have entered the suspicious zone. Proceed at your own risk! 🚨");
+        }
+    </script>
+</body>
+</html>
